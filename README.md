@@ -1,0 +1,2 @@
+# SmartHomeByGestureEstimation
+OOAD TeamWork: SmartHomeByGestureEstimation
