@@ -14,7 +14,7 @@ tv = TV()
 
 # Create your views here.
 def index(request):
-    return render_to_response("index.html")
+    return render_to_response("test.html")
 
 
 def receivePic(request):
@@ -30,3 +30,11 @@ def receivePic(request):
 def getFurnitureState(request):
     result = {'left': left.state, 'right': right.state, 'tv': tv.state, 'soft': soft.state}
     return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+def getPics(request):
+    l = [];
+    l.append("/images/1.jpg")
+    l.append("/images/2.jpg")
+    l.append("/images/3.jpg")
+    return HttpResponse(json.dumps(l), content_type='application/json')

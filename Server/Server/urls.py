@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^getFurnitureState/$', getFurnitureState),
-    url(r'^postPic/$', receivePic)
+    url(r'^postPic/$', receivePic),
+    url(r'^getPics/$', getPics)
 ]
