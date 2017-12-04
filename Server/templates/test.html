@@ -2,9 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Smart Home</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    {% load staticfiles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">Smart Home</a>
+            </div>
+        </div>
+    </nav>
+    <div class="main-container">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left">
+                        <table class="table table-hover">
+                            <caption><h2>display platform</h2></caption>
+                        </table>
+                        <div class="img_container">
+                            <img  class="img-thumbnail main-img" src="{{ url }}" height="500" width="550">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well buttons">
+                        <button  class="btn {{ btn-type }} tv" style="height:40px;width:100px;" type="button">
+                            电视
+                        </button>
+                        <button  class="btn btn-primary left-light" style="height:40px;width:100px;" type="button">
+                            左灯
+                        </button>
+                        <button  class="btn btn-primary right-light" style="height:40px;width:100px;" type="button">
+                            右灯
+                        </button>
+                        <button  class="btn btn-primary sofa" style="height:40px;width:100px;" type="button">
+                            沙发
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" >
+        $(document).ready(function(){
+            setInterval(function() {
+                $("#div1").load("/import_html");
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
