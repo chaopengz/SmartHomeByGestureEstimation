@@ -1,2 +1,7 @@
 .idea
 /Server/Server/__pycache__
+*.pyc
+/Server/web/*.pyc
+/Server/web/migrations/__init__.pyc
+/Server/web/migrations/__pycache__
+/Server/web/__pycache__
