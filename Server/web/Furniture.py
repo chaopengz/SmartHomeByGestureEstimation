@@ -4,7 +4,7 @@ class Furniture(object):
 
 
 class Light(Furniture):
-    def __int__(self):
+    def __init__(self):
         self.name = "light"
         self.state = False
 
@@ -15,7 +15,7 @@ class Light(Furniture):
         self.state = not self.state
 
 
-class soft(Furniture):
+class Soft(Furniture):
     def __init__(self):
         self.name = "soft"
         self.state = False
@@ -27,7 +27,7 @@ class soft(Furniture):
         self.state = not self.state
 
 
-class tv(Furniture):
+class TV(Furniture):
     def __init__(self):
         self.name = "tv"
         self.state = False
