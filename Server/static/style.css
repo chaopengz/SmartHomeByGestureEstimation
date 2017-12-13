@@ -1,0 +1,22 @@
+.navbar{
+    height: 70px;
+}
+.navbar-brand{
+    font-size: 40px;
+    margin-top: 10px;
+}
+.main-container{
+    margin-top: 70px;
+}
+.well{
+    text-align:center;
+}
+.tv{
+    height: 200px;
+    width:250px;
+}
+.lamp{
+    height: 100px;
+    width:100px;
+    margin: 10px 120px;
+}

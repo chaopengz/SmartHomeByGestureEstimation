@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Smart Home</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, height=divice-height, inital-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     {% load staticfiles %}
-    <link type="text/css" rel="stylesheet" href="{% static 'main.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default" role="navigation">
@@ -19,30 +24,20 @@
     <div class="main-container">
         <div class="well">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="left">
-                        <table class="table table-hover">
-                            <caption><h2>display platform</h2></caption>
-                        </table>
-                        <div class="img_container">
-                            <img  class="img-thumbnail main-img" src="{{ url }}" height="500" width="550">
-                        </div>
+                <div class="col-md-6 left-part">
+                    <h2>Gesture</h2>
+                    <div class="img_container">
+                        <img  class="img-thumbnail main-img" src="{% static 'imgs/tv_off.png' %}" height="500" width="550">
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="well buttons">
-                        <button  class="btn {{ btn-type }} tv" style="height:40px;width:100px;" type="button">
-                            电视
-                        </button>
-                        <button  class="btn btn-primary left-light" style="height:40px;width:100px;" type="button">
-                            左灯
-                        </button>
-                        <button  class="btn btn-primary right-light" style="height:40px;width:100px;" type="button">
-                            右灯
-                        </button>
-                        <button  class="btn btn-primary sofa" style="height:40px;width:100px;" type="button">
-                            沙发
-                        </button>
+                <div class="col-md-6 right-part">
+                    <h2>Home</h2>
+                    <div class="well">
+                        <img src="{% static 'imgs/tv_off.png' %}" class="img-rounded tv"/>
+                        <div class="row">
+                            <img src="{% static 'imgs/lamp_off.png' %}" class="img-rounded lamp" />
+                            <img src="{% static 'imgs/lamp_off.png' %}" class="img-rounded lamp" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,8 +45,6 @@
     </div>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" >
         $(document).ready(function(){
             setInterval(function() {

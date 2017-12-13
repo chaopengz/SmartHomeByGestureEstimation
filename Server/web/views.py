@@ -14,7 +14,7 @@ tv = TV()
 
 # Create your views here.
 def index(request):
-    return render_to_response("index.html")
+    return render_to_response("test.html")
 
 
 def receivePic(request):
