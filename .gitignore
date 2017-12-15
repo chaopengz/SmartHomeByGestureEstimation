@@ -11,3 +11,4 @@
 /uploadImage/images
 /TakePhotos/.DS_Store
 /Server/web/migrations
+/Server/web/model/_trained_COCO/pose_iter_440000.caffemodel
