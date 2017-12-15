@@ -24,14 +24,14 @@ def receivePic(request):
         # 接受图片，进行手势判断,修改家具对应的state
         filename = request.FILES['image'].name
         # imagePath = '/home/ubuntu/flower/media/uploads/' + str(int(time.time() * 1000)) + "-" + filename
-        imagePath = '..\uploadImage\images\\' + filename
+        imagePath = '../uploadImage/' + filename
         print 'imagePath is ', imagePath
         destination = open(imagePath, 'wb+')
         for chunk in request.FILES['image'].chunks():
             destination.write(chunk)
         destination.close()
-        resultPath = '..\\resultImages\\' + filename
-        centerHumanKeypoint = poseEstimation.getCenterKeypointsIndex(imagePath, resultPath)
+        resultPath = '../resultImages/' + filename
+        centerHumanKeypoint = poseEstimation.KeypointDetection(imagePath, resultPath)
         poseKind = poseEstimation.getPoseKind(centerHumanKeypoint)
         tv.changeState()
         return HttpResponse(poseKind)
@@ -48,3 +48,4 @@ def getFurnitureState(request):
 def getPics(request):
     resultImage = '..\\resultImages\\OOAD_small.jpeg'
     return HttpResponse(json.dumps(resultImage), content_type='application/json')
+
