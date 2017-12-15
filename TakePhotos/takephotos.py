@@ -27,7 +27,8 @@ def takePhoto():
         cv2.imwrite(file_name, image)
         file_name = compress_photo(file_name)
         upload_image(file_name)
-        print file_name
+        print
+        file_name
 
 
 def compress_photo(filename):
@@ -36,8 +37,10 @@ def compress_photo(filename):
     raito = float(w) / h
     new_height = 368
     new_width = int(new_height * raito)
-    print w, h
-    print new_width, new_height
+    print
+    w, h
+    print
+    new_width, new_height
     new_file_name = filename[0:-4] + '_small.jpeg'
     img.resize((new_width, new_height)).save('images/' + new_file_name)
     return new_file_name
@@ -48,7 +51,8 @@ def upload_image(filename):
     url = 'http://219.223.194.246:8000/postPic/'
     filename = dir + filename
     files = {'image': open(filename, 'rb')}
-    print requests.post(url, files=files)
+    print
+    requests.post(url, files=files)
 
 
 if __name__ == '__main__':

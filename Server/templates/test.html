@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <title>Smart Home</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, height=divice-height, inital-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, height=divice-height, inital-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -14,43 +15,123 @@
     <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="">Smart Home</a>
-            </div>
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Smart Home</a>
         </div>
-    </nav>
-    <div class="main-container">
-        <div class="well">
-            <div class="row">
-                <div class="col-md-6 left-part">
-                    <h2>Gesture</h2>
-                    <div class="img_container">
-                        <img  class="img-thumbnail main-img" src="{% static 'imgs/tv_off.png' %}" height="500" width="550">
-                    </div>
+    </div>
+</nav>
+<div class="main-container">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-6 left-part">
+                <h2>Gesture</h2>
+                <div class="img_container">
+                    <img class="img-thumbnail main-img" src="/static/imgs/tv_off.png" height="500" width="550">
                 </div>
-                <div class="col-md-6 right-part">
-                    <h2>Home</h2>
-                    <div class="well">
-                        <img src="{% static 'imgs/tv_off.png' %}" class="img-rounded tv"/>
-                        <div class="row">
-                            <img src="{% static 'imgs/lamp_off.png' %}" class="img-rounded lamp" />
-                            <img src="{% static 'imgs/lamp_off.png' %}" class="img-rounded lamp" />
-                        </div>
+            </div>
+            <div class="col-md-6 right-part">
+                <h2>Home</h2>
+                <div class="well">
+                    <img class="img-rounded tv" src="/static/imgs/tv_off.png"/>
+                    <div class="row">
+                        <img class="img-rounded lamp left-lamp" src="/static/imgs/lamp_off.png"/>
+                        <img class="img-rounded lamp right-lamp" src="/static/imgs/lamp_off.png"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" >
-        $(document).ready(function(){
-            setInterval(function() {
-                $("#div1").load("/import_html");
-            }, 5000);
+</div>
+<script type="application/javascript">
+{#    $.ajax({#}
+{#        url: "getPics"#}
+{#    }).done(function (result) {#}
+{#        var i = 0;#}
+{#        setInterval(function () {#}
+{#            if (i < 3) {#}
+{#                $('.main-img').attr("src", "/static" + result[i]);#}
+{#                i++;#}
+{#            }#}
+{#            else {#}
+{#                i = 0;#}
+{#            }#}
+{#        }, 17);#}
+{#    });#}
+    function loopon() {
+        $.ajax({
+            url:"getPics",
+            cache: false,//true表示缓存开启, false表示缓存不开启
+            success:function (result) {
+{#                var i = 0;#}
+{#                setInterval(function () {#}
+{#                    if (i < 3) {#}
+{#                        $('.main-img').attr("src", "/static" + result[i]);#}
+{#                        i++;#}
+{#                    }#}
+{#                    else {#}
+{#                        i = 0;#}
+{#                    }#}
+{#                }, 17)#}
+{#                console.log(result[0])#}
+                $('.main-img').attr("src", "/static" + result);
+            }
         });
-    </script>
+        $.ajax({
+            url: "getFurnitureState",
+            cache: false,//true表示缓存开启, false表示缓存不开启
+            success: function (result) {
+{#                setInterval(function () {#}
+{#                    if (result["left"] == true) {#}
+{#                        $(".left-lamp").attr("src", "/static/imgs/lamp_on.png")#}
+{#                    } else {#}
+{#                        $(".left-lamp").attr("src", "/static/imgs/lamp_off.png")#}
+{#                    }#}
+{#                    if (result["right"] == true) {#}
+{#                        $(".right-lamp").attr("src", "/static/imgs/lamp_on.png")#}
+{#                    } else {#}
+{#                        $(".right-lamp").attr("src", "/static/imgs/lamp_off.png")#}
+{#                    }#}
+{#                    if (result["tv"] == true) {#}
+{#                        $(".tv").attr("src", "/static/imgs/tv_on.png")#}
+{#                    } else {#}
+{#                        $(".tv").attr("src", "/static/imgs/tv_off.png")#}
+{#                    }#}
+{#                }, 17);#}
+                 if (result["left"] == true) {
+                     $(".left-lamp").attr("src", "/static/imgs/lamp_on.png")
+                 } else {
+                     $(".left-lamp").attr("src", "/static/imgs/lamp_off.png")
+                 }
+                 if (result["right"] == true) {
+                     $(".right-lamp").attr("src", "/static/imgs/lamp_on.png")
+                 } else {
+                     $(".right-lamp").attr("src", "/static/imgs/lamp_off.png")
+                 }
+                 if (result["tv"] == true) {
+                     $(".tv").attr("src", "/static/imgs/tv_on.png")
+                 } else {
+                     $(".tv").attr("src", "/static/imgs/tv_off.png")
+                 }
+            }
+        });
+    }
+    $(document).ready(function(){
+        setInterval(loopon, 300);  //设置为每s刷新1次
+    });
+
+{#            function clocktime(){#}
+{#                $.ajax({#}
+{#                    url:"{% url "asktime" %}",#}
+{#                    success:function(result){#}
+{#                        $('.main-img').attr("src", result.url);}#}
+{#                });#}
+{#                setTimeout("clocktime();", 1000);  //设置为每1s刷新1次#}
+{#            }#}
+{#            $(document).ready(function(){#}
+{#                clocktime();#}
+{#            });#}
+</script>
 </body>
 </html>
