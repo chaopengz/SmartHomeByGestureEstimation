@@ -8,6 +8,7 @@ class Light(Furniture):
         self.name = "light"
         self.state = False
 
+
     def getState(self):
         return self.state
 
