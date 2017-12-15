@@ -22,14 +22,14 @@ def receivePic(request):
         # 接受图片，进行手势判断,修改家具对应的state
         filename = request.FILES['image'].name
         # imagePath = '/home/ubuntu/flower/media/uploads/' + str(int(time.time() * 1000)) + "-" + filename
-        imagePath = 'F:\OOAD\SmartHomeByGestureEstimation\uploadImage\images' + filename
+        imagePath = 'F:\OOAD\SmartHomeByGestureEstimation\uploadImage\images\\' + filename
         print 'imagePath is ', imagePath
         destination = open(imagePath, 'wb+')
         for chunk in request.FILES['image'].chunks():
             destination.write(chunk)
         destination.close()
         tv.changeState()
-        pass
+        return HttpResponse("PostImageSuccess!")
     else:
         tv.changeState()
         return render_to_response("index.html")
