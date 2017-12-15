@@ -35,6 +35,6 @@ def getFurnitureState(request):
 def getPics(request):
     l = [];
     l.append("/imgs/1.jpg")
-    # l.append("/imgs/2.jpg")
-    # l.append("/imgs/3.jpg")
+    l.append("/imgs/2.jpg")
+    l.append("/imgs/3.jpg")
     return HttpResponse(json.dumps(l), content_type='application/json')
