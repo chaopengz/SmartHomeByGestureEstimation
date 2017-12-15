@@ -23,7 +23,6 @@ def receivePic(request):
     if request.method == "POST":
         # 接受图片，进行手势判断,修改家具对应的state
         filename = request.FILES['image'].name
-        # imagePath = '/home/ubuntu/flower/media/uploads/' + str(int(time.time() * 1000)) + "-" + filename
         imagePath = '../uploadImage/' + filename
         print 'imagePath is ', imagePath
         destination = open(imagePath, 'wb+')
@@ -31,6 +30,7 @@ def receivePic(request):
             destination.write(chunk)
         destination.close()
         resultPath = '../resultImages/' + filename
+        print resultPath
         centerHumanKeypoint = poseEstimation.KeypointDetection(imagePath, resultPath)
         poseKind = poseEstimation.getPoseKind(centerHumanKeypoint)
         tv.changeState()

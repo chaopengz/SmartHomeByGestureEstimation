@@ -269,13 +269,16 @@ class PoseEstimation():
         # -----------------------------------------------------
         # return center person keypoints
         centerIndex = self.getCenterKeypointsIndex(oriImg, all_keypoints)
-
-        return all_keypoints[centerIndex]
+        if centerIndex != -1:
+            return all_keypoints[centerIndex]
+        else:
+            return []
 
     # return index of center person
     def getCenterKeypointsIndex(self, oriImg, keypoints_list):
-
-        if len(keypoints_list) == 1:
+        if len(keypoints_list) == 0:
+            return -1
+        elif len(keypoints_list) == 1:
             return 0
 
         height, width = oriImg.shape[0], oriImg.shape[1]
@@ -304,6 +307,8 @@ class PoseEstimation():
     # return kind
     # 1.right hand 2.one hands vertical 3.left hands 4. two hands
     def getPoseKind(self, center_keypoints):
+        if len(center_keypoints) == 0:
+            return -1
         # left hand
         Lelbow = np.array(center_keypoints[6]).astype(float)
         Lwrist = np.array(center_keypoints[7]).astype(float)
