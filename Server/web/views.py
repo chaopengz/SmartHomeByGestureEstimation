@@ -15,37 +15,48 @@ poseEstimation = PoseEstimation()
 
 
 # Create your views here.
-def index(request):
-    return render_to_response("test.html")
+class SmartHomeWeb():
+    def index(request):
+        return render_to_response("test.html")
 
+    def receivePic(request):
+        if request.method == "POST":
+            # 接受图片，进行手势判断,修改家具对应的state
+            filename = request.FILES['image'].name
+            imagePath = '../uploadImage/' + filename
+            # print 'imagePath is ', imagePath
+            destination = open(imagePath, 'wb+')
+            for chunk in request.FILES['image'].chunks():
+                destination.write(chunk)
+            destination.close()
 
-def receivePic(request):
-    if request.method == "POST":
-        # 接受图片，进行手势判断,修改家具对应的state
-        filename = request.FILES['image'].name
-        # imagePath = '/home/ubuntu/flower/media/uploads/' + str(int(time.time() * 1000)) + "-" + filename
-        imagePath = '../uploadImage/' + filename
-        print 'imagePath is ', imagePath
-        destination = open(imagePath, 'wb+')
-        for chunk in request.FILES['image'].chunks():
-            destination.write(chunk)
-        destination.close()
-        resultPath = '../resultImages/' + filename
-        centerHumanKeypoint = poseEstimation.KeypointDetection(imagePath, resultPath)
-        poseKind = poseEstimation.getPoseKind(centerHumanKeypoint)
-        tv.changeState()
-        return HttpResponse(poseKind)
-    else:
-        tv.changeState()
-        return render_to_response("index.html")
+            resultPath = '/home/yihongwei/workspace/SmartHomeByGestureEstimation/' \
+                         'Server/static/resultImages/' + filename
+            centerHumanKeypoint = poseEstimation.KeypointDetection(imagePath, resultPath)
+            poseKind = poseEstimation.getPoseKind(centerHumanKeypoint)
 
+            resultImage = '/static/resultImages/' + filename
+            poseEstimation.setResultImage(resultImage)
+            SmartHomeWeb.changeFrunitureState(poseKind)
 
-def getFurnitureState(request):
-    result = {'left': left.state, 'right': right.state, 'tv': tv.state, 'soft': soft.state}
-    return HttpResponse(json.dumps(result), content_type='application/json')
+            return HttpResponse(poseKind)
+        else:
+            return HttpResponse("Only post will be process!")
 
+    def getFurnitureState(request):
+        result = {'left': left.getState(), 'right': right.getState(), 'tv': tv.getState(), 'soft': soft.getState()}
+        return HttpResponse(json.dumps(result), content_type='application/json')
 
-def getPics(request):
-    resultImage = '..\\resultImages\\OOAD_small.jpeg'
-    return HttpResponse(json.dumps(resultImage), content_type='application/json')
+    def getPics(request):
+        resultImage = poseEstimation.getResultImage()
+        return HttpResponse(json.dumps(resultImage), content_type='application/json')
 
+    def changeFrunitureState(self, poseKind):
+        if poseKind == 1:
+            tv.changeState()
+        elif poseKind == 2:
+            left.changeState()
+        elif poseKind == 3:
+            right.changeState()
+        else:
+            pass

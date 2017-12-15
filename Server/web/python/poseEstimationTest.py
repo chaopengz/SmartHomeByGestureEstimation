@@ -70,7 +70,6 @@ class PoseEstimation():
 
             heatmap_avg = heatmap_avg + heatmap / len(multiplier)
             paf_avg = paf_avg + paf / len(multiplier)
-        pass
         # --------------------------------------------
         # get all peaks
         print heatmap_avg.shape
@@ -366,6 +365,12 @@ class PoseEstimation():
                 return 4
         return -1
 
+    def setResultImage(self, filepath):
+        self.resultImagePath = filepath
+
+    def getResultImage(self):
+        return self.resultImagePath
+
 
 if __name__ == "__main__":
     # init model
@@ -378,16 +383,15 @@ if __name__ == "__main__":
     # else:
     #     caffe.set_mode_cpu()
     # net = caffe.Net(model['deployFile'], model['caffemodel'], caffe.TEST)
-
-    image = cv.imread('../sample_image/7.jpg')
-    obj = PoseEstimation()
-    centerHumanKeypoint = obj.KeypointDetection('../sample_image/7.jpg', '../sample_image/result.jpg')
-    poseKind = obj.getPoseKind(centerHumanKeypoint)
-    print "poseKind:", poseKind
-    kindName = ['left hand rise up', 'left or right hand rise vertically',
-                'right hand rise up', 'two hands rise up']
-    if poseKind != -1:
-        print 'Pose kind: ', kindName[poseKind - 1]
-    else:
-        print 'No defined Pose'
+    # image = cv.imread('../sample_image/7.jpg')
+    # obj = PoseEstimation()
+    # centerHumanKeypoint = obj.KeypointDetection('../sample_image/7.jpg', '../sample_image/result.jpg')
+    # poseKind = obj.getPoseKind(centerHumanKeypoint)
+    # print "poseKind:", poseKind
+    # kindName = ['left hand rise up', 'left or right hand rise vertically',
+    #             'right hand rise up', 'two hands rise up']
+    # if poseKind != -1:
+    #     print 'Pose kind: ', kindName[poseKind - 1]
+    # else:
+    #     print 'No defined Pose'
     pass

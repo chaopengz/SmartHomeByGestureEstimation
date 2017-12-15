@@ -11,3 +11,5 @@
 /uploadImage/images
 /TakePhotos/.DS_Store
 /Server/web/migrations
+/*.DS_Store
+/Server/poseEstimation
