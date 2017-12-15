@@ -64,41 +64,14 @@
             url:"getPics",
             cache: false,//true表示缓存开启, false表示缓存不开启
             success:function (result) {
-{#                var i = 0;#}
-{#                setInterval(function () {#}
-{#                    if (i < 3) {#}
-{#                        $('.main-img').attr("src", "/static" + result[i]);#}
-{#                        i++;#}
-{#                    }#}
-{#                    else {#}
-{#                        i = 0;#}
-{#                    }#}
-{#                }, 17)#}
-{#                console.log(result[0])#}
-                $('.main-img').attr("src", "/static" + result);
+
+                $('.main-img').attr("src", result);
             }
         });
         $.ajax({
             url: "getFurnitureState",
             cache: false,//true表示缓存开启, false表示缓存不开启
             success: function (result) {
-{#                setInterval(function () {#}
-{#                    if (result["left"] == true) {#}
-{#                        $(".left-lamp").attr("src", "/static/imgs/lamp_on.png")#}
-{#                    } else {#}
-{#                        $(".left-lamp").attr("src", "/static/imgs/lamp_off.png")#}
-{#                    }#}
-{#                    if (result["right"] == true) {#}
-{#                        $(".right-lamp").attr("src", "/static/imgs/lamp_on.png")#}
-{#                    } else {#}
-{#                        $(".right-lamp").attr("src", "/static/imgs/lamp_off.png")#}
-{#                    }#}
-{#                    if (result["tv"] == true) {#}
-{#                        $(".tv").attr("src", "/static/imgs/tv_on.png")#}
-{#                    } else {#}
-{#                        $(".tv").attr("src", "/static/imgs/tv_off.png")#}
-{#                    }#}
-{#                }, 17);#}
                  if (result["left"] == true) {
                      $(".left-lamp").attr("src", "/static/imgs/lamp_on.png")
                  } else {

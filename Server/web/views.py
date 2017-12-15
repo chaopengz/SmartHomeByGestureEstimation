@@ -29,9 +29,13 @@ def receivePic(request):
         for chunk in request.FILES['image'].chunks():
             destination.write(chunk)
         destination.close()
-        resultPath = '../resultImages/' + filename
+        # resultPath = '../static/resultImages/' + filename
+        resultPath = '/home/yihongwei/workspace/SmartHomeByGestureEstimation/' \
+                     'Server/static/resultImages/' + filename
         print resultPath
         centerHumanKeypoint = poseEstimation.KeypointDetection(imagePath, resultPath)
+        resultImage = '/static/resultImages/' + filename
+        poseEstimation.setResultImage(resultImage)
         poseKind = poseEstimation.getPoseKind(centerHumanKeypoint)
         tv.changeState()
         return HttpResponse(poseKind)
@@ -46,6 +50,6 @@ def getFurnitureState(request):
 
 
 def getPics(request):
-    resultImage = '..\\resultImages\\OOAD_small.jpeg'
+    # resultImage = '..\\resultImages\\OOAD_small.jpeg'
+    resultImage = poseEstimation.getResultImage()
     return HttpResponse(json.dumps(resultImage), content_type='application/json')
-

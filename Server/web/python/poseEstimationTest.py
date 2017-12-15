@@ -28,6 +28,7 @@ class PoseEstimation():
             caffe.set_mode_cpu()
 
         self.net = caffe.Net(self.model['deployFile'], self.model['caffemodel'], caffe.TEST)
+        self.resultImagePath = ""
 
     # return center keypoints
     def KeypointDetection(self, oriImg_path, render_image_path):
@@ -370,6 +371,12 @@ class PoseEstimation():
             else:
                 return 4
         return -1
+
+    def setResultImage(self, filepath):
+        self.resultImagePath = filepath
+
+    def getResultImage(self):
+        return self.resultImagePath
 
 
 if __name__ == "__main__":
