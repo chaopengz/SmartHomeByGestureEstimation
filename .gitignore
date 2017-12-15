@@ -14,3 +14,7 @@
 /*.DS_Store
 /Server/web/model/_trained_COCO/pose_iter_440000.caffemodel
 /Server/poseEstimation
+*.jpg
+*.jpeg
+/uploadImage/*.jpeg
+/Server/static/resultImages
