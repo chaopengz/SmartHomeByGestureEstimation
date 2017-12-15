@@ -19,16 +19,24 @@ class PoseEstimation():
         # init model
         self.param, self.model = config_reader()
         # multiplier = [x * model['boxsize'] / oriImg.shape[0] for x in param['scale_search']]
-        if param['use_gpu']:
+        if self.param['use_gpu']:
+            print "gpu model"
             caffe.set_mode_gpu()
-            caffe.set_device(param['GPUdeviceNumber'])  # set to your device!
+            caffe.set_device(self.param['GPUdeviceNumber'])  # set to your device!
         else:
+            print "cpu model"
             caffe.set_mode_cpu()
-        self.net = caffe.Net(model['deployFile'], model['caffemodel'], caffe.TEST)
+
+        self.net = caffe.Net(self.model['deployFile'], self.model['caffemodel'], caffe.TEST)
 
     # return center keypoints
     def KeypointDetection(self, oriImg_path, render_image_path):
+
+        caffe.set_mode_gpu()
+        caffe.set_device(self.param['GPUdeviceNumber'])
+
         oriImg = cv.imread(oriImg_path)
+        print "image size:", oriImg.shape
         multiplier = [x * self.model['boxsize'] / oriImg.shape[0] for x in self.param['scale_search']]
         # get heatmap and paf map
         heatmap_avg = np.zeros((oriImg.shape[0], oriImg.shape[1], 19))
@@ -266,6 +274,7 @@ class PoseEstimation():
 
     # return index of center person
     def getCenterKeypointsIndex(self, oriImg, keypoints_list):
+
         if len(keypoints_list) == 1:
             return 0
 
@@ -359,8 +368,9 @@ class PoseEstimation():
 
 
 if __name__ == "__main__":
-    # # init model
+    # init model
     # param, model = config_reader()
+    #
     # # multiplier = [x * model['boxsize'] / oriImg.shape[0] for x in param['scale_search']]
     # if param['use_gpu']:
     #     caffe.set_mode_gpu()
@@ -368,16 +378,16 @@ if __name__ == "__main__":
     # else:
     #     caffe.set_mode_cpu()
     # net = caffe.Net(model['deployFile'], model['caffemodel'], caffe.TEST)
-    #
-    # image = cv.imread('../sample_image/7.jpg')
-    #
-    # centerHumanKeypoint = KeypointDetection(model, net, param, image, '../sample_image/result.jpg')
-    # poseKind = getPoseKind(centerHumanKeypoint)
-    # print "poseKind:", poseKind
-    # kindName = ['left hand rise up', 'left or right hand rise vertically',
-    #             'right hand rise up', 'two hands rise up']
-    # if poseKind != -1:
-    #     print 'Pose kind: ', kindName[poseKind - 1]
-    # else:
-    #     print 'No defined Pose'
+
+    image = cv.imread('../sample_image/7.jpg')
+    obj = PoseEstimation()
+    centerHumanKeypoint = obj.KeypointDetection('../sample_image/7.jpg', '../sample_image/result.jpg')
+    poseKind = obj.getPoseKind(centerHumanKeypoint)
+    print "poseKind:", poseKind
+    kindName = ['left hand rise up', 'left or right hand rise vertically',
+                'right hand rise up', 'two hands rise up']
+    if poseKind != -1:
+        print 'Pose kind: ', kindName[poseKind - 1]
+    else:
+        print 'No defined Pose'
     pass

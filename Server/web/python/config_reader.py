@@ -4,7 +4,7 @@ import numpy as np
 
 def config_reader():
     config = ConfigObj('config')
-
+    print config
     param = config['param']
     model_id = param['modelID']
     model = config['models'][model_id]
