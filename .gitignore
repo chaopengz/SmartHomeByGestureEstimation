@@ -18,3 +18,4 @@
 *.jpeg
 /uploadImage/*.jpeg
 /Server/static/resultImages
+/uploadImage
