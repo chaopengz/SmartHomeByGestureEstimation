@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', SmartHomeWeb.index),
     url(r'^getFurnitureState/$', SmartHomeWeb.getFurnitureState),
     url(r'^postPic/$', SmartHomeWeb.receivePic),
-    url(r'^getPics/$', SmartHomeWeb.getPics)
+    url(r'^getPics/$', SmartHomeWeb.getPics),
+    url(r'^upload/$', SmartHomeWeb.uploadImage)
 ]

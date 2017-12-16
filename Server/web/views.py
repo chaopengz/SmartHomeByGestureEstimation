@@ -60,3 +60,7 @@ class SmartHomeWeb():
             right.changeState()
         else:
             pass
+
+    @staticmethod
+    def uploadImage(request):
+        return render_to_response("upload.html")
