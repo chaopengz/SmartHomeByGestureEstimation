@@ -16,9 +16,11 @@ poseEstimation = PoseEstimation()
 
 # Create your views here.
 class SmartHomeWeb():
+    @staticmethod
     def index(request):
         return render_to_response("test.html")
 
+    @staticmethod
     def receivePic(request):
         if request.method == "POST":
             # 接受图片，进行手势判断,修改家具对应的state
@@ -43,14 +45,17 @@ class SmartHomeWeb():
         else:
             return HttpResponse("Only post will be process!")
 
+    @staticmethod
     def getFurnitureState(request):
         result = {'left': left.getState(), 'right': right.getState(), 'tv': tv.getState(), 'soft': soft.getState()}
         return HttpResponse(json.dumps(result), content_type='application/json')
 
+    @staticmethod
     def getPics(request):
         resultImage = poseEstimation.getResultImage()
         return HttpResponse(json.dumps(resultImage), content_type='application/json')
 
+    @staticmethod
     def changeFrunitureState(self, poseKind):
         if poseKind == 1:
             tv.changeState()
