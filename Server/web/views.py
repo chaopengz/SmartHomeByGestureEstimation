@@ -56,12 +56,12 @@ class SmartHomeWeb():
         return HttpResponse(json.dumps(resultImage), content_type='application/json')
 
     @staticmethod
-    def changeFrunitureState(self, poseKind):
-        if poseKind == 1:
+    def changeFrunitureState(poseKind):
+        if poseKind == 4:
             tv.changeState()
-        elif poseKind == 2:
-            left.changeState()
         elif poseKind == 3:
+            left.changeState()
+        elif poseKind == 1:
             right.changeState()
         else:
             pass
