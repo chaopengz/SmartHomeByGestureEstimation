@@ -2,10 +2,10 @@ class Furniture(object):
     def __init__(self):
         self.state = False
 
-    def trunON(self):
+    def turnON(self):
         self.state = True
 
-    def trunOFF(self):
+    def turnOFF(self):
         self.state = False
 
     def getState(self):

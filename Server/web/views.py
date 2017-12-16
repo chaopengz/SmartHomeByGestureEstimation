@@ -57,12 +57,18 @@ class SmartHomeWeb():
 
     @staticmethod
     def changeFrunitureState(poseKind):
-        if poseKind == 4:
-            tv.changeState()
+        if poseKind == 1:
+            left.turnON()
+        elif poseKind == 2:
+            left.turnOFF()
         elif poseKind == 3:
-            left.changeState()
-        elif poseKind == 1:
-            right.changeState()
+            right.turnON()
+        elif poseKind == 4:
+            right.turnOFF()
+        elif poseKind == 5:
+            tv.turnON()
+        elif poseKind == 6:
+            tv.turnOFF()
         else:
             pass
 
