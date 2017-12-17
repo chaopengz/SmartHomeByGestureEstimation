@@ -17,6 +17,13 @@ poseEstimation = PoseEstimation()
 # Create your views here.
 class SmartHomeWeb():
     @staticmethod
+    def __init__(self):
+        self.left = Light()
+        self.right = Light()
+        self.soft = Soft()
+        self.tv = TV()
+        self.poseEstimation = PoseEstimation()
+
     def index(request):
         return render_to_response("test.html")
 
@@ -34,11 +41,13 @@ class SmartHomeWeb():
 
             resultPath = '/home/yihongwei/workspace/SmartHomeByGestureEstimation/' \
                          'Server/static/resultImages/' + filename
+
             centerHumanKeypoint = poseEstimation.KeypointDetection(imagePath, resultPath)
             poseKind = poseEstimation.getPoseKind(centerHumanKeypoint)
 
             resultImage = '/static/resultImages/' + filename
             poseEstimation.setResultImage(resultImage)
+
             SmartHomeWeb.changeFrunitureState(poseKind)
 
             return HttpResponse(poseKind)
