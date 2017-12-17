@@ -337,7 +337,7 @@ class PoseEstimation():
                 if tanh < 1.7:  # around 60
                     return 3  # left hand rise
                 else:  # larger 60
-                    return 2  # left hand vertical
+                    return 4  # left hand vertical
             elif (Lwrist[0] == Lelbow[0] and Lwrist[1] <= Lelbow[1]):
                 return 2
         else:
@@ -361,14 +361,17 @@ class PoseEstimation():
                 if tanhL < 1.7:
                     return 3
                 else:
-                    return 2
+                    return 4
             elif (tanhL == -1):
                 if tanhR < 1.7:
                     return 1
                 else:
                     return 2
             else:
-                return 4
+                if tanhR > 1.7 and tanhL > 1.7:
+                    return 6
+                else:
+                    return 5
         return -1
 
     def setResultImage(self, filepath):
@@ -379,25 +382,26 @@ class PoseEstimation():
 
 
 if __name__ == "__main__":
-    # init model
-    # param, model = config_reader()
-    #
-    # # multiplier = [x * model['boxsize'] / oriImg.shape[0] for x in param['scale_search']]
-    # if param['use_gpu']:
-    #     caffe.set_mode_gpu()
-    #     caffe.set_device(param['GPUdeviceNumber'])  # set to your device!
-    # else:
-    #     caffe.set_mode_cpu()
-    # net = caffe.Net(model['deployFile'], model['caffemodel'], caffe.TEST)
-    # image = cv.imread('../sample_image/7.jpg')
-    # obj = PoseEstimation()
-    # centerHumanKeypoint = obj.KeypointDetection('../sample_image/7.jpg', '../sample_image/result.jpg')
-    # poseKind = obj.getPoseKind(centerHumanKeypoint)
-    # print "poseKind:", poseKind
-    # kindName = ['left hand rise up', 'left or right hand rise vertically',
-    #             'right hand rise up', 'two hands rise up']
-    # if poseKind != -1:
-    #     print 'Pose kind: ', kindName[poseKind - 1]
-    # else:
-    #     print 'No defined Pose'
+    #init model
+    param, model = config_reader()
+
+    # multiplier = [x * model['boxsize'] / oriImg.shape[0] for x in param['scale_search']]
+    if param['use_gpu']:
+        caffe.set_mode_gpu()
+        caffe.set_device(param['GPUdeviceNumber'])  # set to your device!
+    else:
+        caffe.set_mode_cpu()
+    net = caffe.Net(model['deployFile'], model['caffemodel'], caffe.TEST)
+    image = cv.imread('../sample_image/8.jpeg')
+    obj = PoseEstimation()
+    centerHumanKeypoint = obj.KeypointDetection('../sample_image/9.jpeg', '../sample_image/result.jpg')
+    poseKind = obj.getPoseKind(centerHumanKeypoint)
+    print "poseKind:", poseKind
+    kindName = ['left hand rise up', 'left hand rise vertically',
+                'right hand rise up', 'right hand rise vertically',
+                'two hands rise up', 'two hands rise vertically']
+    if poseKind != -1:
+        print 'Pose kind: ', kindName[poseKind - 1]
+    else:
+        print 'No defined Pose'
     pass
